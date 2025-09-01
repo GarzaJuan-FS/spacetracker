@@ -1,0 +1,99 @@
+<div class="detail-container">
+  <% if (galaxy.image) { %>
+  <img
+    src="<%= galaxy.image %>"
+    alt="<%= galaxy.name %>"
+    class="detail-image"
+  />
+  <% } else { %>
+  <div
+    style="
+      height: 300px;
+      background: linear-gradient(45deg, #1e3c72, #2a5298);
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      color: white;
+      font-size: 5rem;
+    "
+  >
+    🌌
+  </div>
+  <% } %>
+
+  <div class="detail-content">
+    <h1><%= galaxy.name %></h1>
+
+    <div class="detail-meta">
+      <div>
+        <strong>Galaxy ID</strong>
+        <span>#<%= galaxy.id %></span>
+      </div>
+      <div>
+        <strong>Size</strong>
+        <span
+          ><%= galaxy.size ? galaxy.size.toLocaleString() + ' light-years' :
+          'Unknown' %></span
+        >
+      </div>
+      <div>
+        <strong>Created</strong>
+        <span><%= galaxy.createdAt.toLocaleDateString() %></span>
+      </div>
+      <div>
+        <strong>Last Updated</strong>
+        <span><%= galaxy.updatedAt.toLocaleDateString() %></span>
+      </div>
+    </div>
+
+    <% if (galaxy.description) { %>
+    <div style="margin: 2rem 0">
+      <h3>Description</h3>
+      <p style="line-height: 1.8; color: #666"><%= galaxy.description %></p>
+    </div>
+    <% } %> <% if (galaxy.Stars && galaxy.Stars.length > 0) { %>
+    <div style="margin: 2rem 0">
+      <h3>Stars in this Galaxy</h3>
+      <div
+        style="
+          display: grid;
+          grid-template-columns: repeat(auto-fill, minmax(200px, 1fr));
+          gap: 1rem;
+          margin: 1rem 0;
+        "
+      >
+        <% galaxy.Stars.forEach(star => { %>
+        <div style="background: #f8f9fa; padding: 1rem; border-radius: 5px">
+          <strong
+            ><a
+              href="/stars/<%= star.id %>"
+              style="color: #2a5298; text-decoration: none"
+              ><%= star.name %></a
+            ></strong
+          >
+          <p style="font-size: 0.9rem; color: #666; margin: 0.5rem 0 0 0">
+            Size: <%= star.size ? star.size.toLocaleString() + ' km' : 'Unknown'
+            %>
+          </p>
+        </div>
+        <% }) %>
+      </div>
+    </div>
+    <% } %>
+
+    <div style="margin: 2rem 0; padding-top: 2rem; border-top: 1px solid #eee">
+      <a href="/galaxies" class="btn btn-secondary">← Back to Galaxies</a>
+      <a href="/galaxies/<%= galaxy.id %>/edit" class="btn btn-primary"
+        >Edit Galaxy</a
+      >
+      <form
+        method="POST"
+        action="/galaxies/<%= galaxy.id %>?_method=DELETE"
+        style="display: inline"
+        onsubmit="return confirm('Are you sure you want to delete this galaxy?')"
+      >
+        <button type="submit" class="btn btn-danger">Delete Galaxy</button>
+      </form>
+    </div>
+  </div>
+</div>

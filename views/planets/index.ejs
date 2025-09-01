@@ -1,0 +1,59 @@
+<div class="page-header">
+  <h1>🪐 Planets</h1>
+  <p>Explore the diverse worlds that orbit stars throughout the universe</p>
+  <a href="/planets/new" class="btn btn-success">Add New Planet</a>
+</div>
+
+<% if (planets.length === 0) { %>
+<div style="text-align: center; margin: 3rem 0">
+  <h3>No planets found</h3>
+  <p>Start mapping the cosmos by adding your first planet!</p>
+  <a href="/planets/new" class="btn btn-primary">Add First Planet</a>
+</div>
+<% } else { %>
+<div class="resource-grid">
+  <% planets.forEach(planet => { %>
+  <div class="resource-card">
+    <% if (planet.image) { %>
+    <img src="<%= planet.image %>" alt="<%= planet.name %>" />
+    <% } else { %>
+    <div
+      style="
+        height: 200px;
+        background: linear-gradient(45deg, #4ecdc4, #44a08d);
+        display: flex;
+        align-items: center;
+        justify-content: center;
+        color: white;
+        font-size: 3rem;
+        border-radius: 8px;
+        margin-bottom: 1rem;
+      "
+    >
+      🪐
+    </div>
+    <% } %>
+
+    <h3><%= planet.name %></h3>
+    <p>
+      <strong>Size:</strong> <%= planet.size ? planet.size.toLocaleString() + '
+      km' : 'Unknown' %>
+    </p>
+    <p>
+      <%= planet.description ? planet.description.substring(0, 100) +
+      (planet.description.length > 100 ? '...' : '') : 'No description
+      available' %>
+    </p>
+
+    <div style="margin-top: 1rem">
+      <a href="/planets/<%= planet.id %>" class="btn btn-primary"
+        >View Details</a
+      >
+      <a href="/planets/<%= planet.id %>/edit" class="btn btn-secondary"
+        >Edit</a
+      >
+    </div>
+  </div>
+  <% }) %>
+</div>
+<% } %>

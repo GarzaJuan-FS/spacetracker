@@ -1,0 +1,32 @@
+<!DOCTYPE html>
+<html lang="en">
+  <head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title><%= title || 'Star Tracker Library' %></title>
+    <link rel="stylesheet" href="/css/style.css" />
+  </head>
+  <body>
+    <header>
+      <nav class="navbar">
+        <div class="nav-container">
+          <h1><a href="/">Star Tracker Library</a></h1>
+          <ul class="nav-menu">
+            <li><a href="/galaxies">Galaxies</a></li>
+            <li><a href="/stars">Stars</a></li>
+            <li><a href="/planets">Planets</a></li>
+          </ul>
+        </div>
+      </nav>
+    </header>
+
+    <main class="container"><%- body %></main>
+
+    <footer>
+      <p>
+        &copy; 2025 Star Tracker Library. Exploring the universe, one object at
+        a time.
+      </p>
+    </footer>
+  </body>
+</html>

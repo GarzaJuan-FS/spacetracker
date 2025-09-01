@@ -1,0 +1,61 @@
+<div class="page-header">
+  <h1>🌌 Galaxies</h1>
+  <p>
+    Explore the vast collections of stars, gas, and dark matter in our universe
+  </p>
+  <a href="/galaxies/new" class="btn btn-success">Add New Galaxy</a>
+</div>
+
+<% if (galaxies.length === 0) { %>
+<div style="text-align: center; margin: 3rem 0">
+  <h3>No galaxies found</h3>
+  <p>Start exploring the universe by adding your first galaxy!</p>
+  <a href="/galaxies/new" class="btn btn-primary">Add First Galaxy</a>
+</div>
+<% } else { %>
+<div class="resource-grid">
+  <% galaxies.forEach(galaxy => { %>
+  <div class="resource-card">
+    <% if (galaxy.image) { %>
+    <img src="<%= galaxy.image %>" alt="<%= galaxy.name %>" />
+    <% } else { %>
+    <div
+      style="
+        height: 200px;
+        background: linear-gradient(45deg, #1e3c72, #2a5298);
+        display: flex;
+        align-items: center;
+        justify-content: center;
+        color: white;
+        font-size: 3rem;
+        border-radius: 8px;
+        margin-bottom: 1rem;
+      "
+    >
+      🌌
+    </div>
+    <% } %>
+
+    <h3><%= galaxy.name %></h3>
+    <p>
+      <strong>Size:</strong> <%= galaxy.size ? galaxy.size.toLocaleString() + '
+      light-years' : 'Unknown' %>
+    </p>
+    <p>
+      <%= galaxy.description ? galaxy.description.substring(0, 100) +
+      (galaxy.description.length > 100 ? '...' : '') : 'No description
+      available' %>
+    </p>
+
+    <div style="margin-top: 1rem">
+      <a href="/galaxies/<%= galaxy.id %>" class="btn btn-primary"
+        >View Details</a
+      >
+      <a href="/galaxies/<%= galaxy.id %>/edit" class="btn btn-secondary"
+        >Edit</a
+      >
+    </div>
+  </div>
+  <% }) %>
+</div>
+<% } %>
