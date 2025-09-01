@@ -1,0 +1,58 @@
+<div class="page-header">
+  <h1>⭐ Stars</h1>
+  <p>Discover the brilliant fusion reactors that light up our universe</p>
+  <a href="/stars/new" class="btn btn-success">Add New Star</a>
+</div>
+
+<% if (stars.length === 0) { %>
+<div style="text-align: center; margin: 3rem 0">
+  <h3>No stars found</h3>
+  <p>Start exploring the cosmos by adding your first star!</p>
+  <a href="/stars/new" class="btn btn-primary">Add First Star</a>
+</div>
+<% } else { %>
+<div class="resource-grid">
+  <% stars.forEach(star => { %>
+  <div class="resource-card">
+    <% if (star.image) { %>
+    <img src="<%= star.image %>" alt="<%= star.name %>" />
+    <% } else { %>
+    <div
+      style="
+        height: 200px;
+        background: linear-gradient(45deg, #ff6b6b, #ffd93d);
+        display: flex;
+        align-items: center;
+        justify-content: center;
+        color: white;
+        font-size: 3rem;
+        border-radius: 8px;
+        margin-bottom: 1rem;
+      "
+    >
+      ⭐
+    </div>
+    <% } %>
+
+    <h3><%= star.name %></h3>
+    <p>
+      <strong>Size:</strong> <%= star.size ? star.size.toLocaleString() + ' km'
+      : 'Unknown' %>
+    </p>
+    <p>
+      <strong>Galaxy:</strong> <%= star.Galaxy ? star.Galaxy.name : 'Unknown' %>
+    </p>
+    <p>
+      <%= star.description ? star.description.substring(0, 100) +
+      (star.description.length > 100 ? '...' : '') : 'No description available'
+      %>
+    </p>
+
+    <div style="margin-top: 1rem">
+      <a href="/stars/<%= star.id %>" class="btn btn-primary">View Details</a>
+      <a href="/stars/<%= star.id %>/edit" class="btn btn-secondary">Edit</a>
+    </div>
+  </div>
+  <% }) %>
+</div>
+<% } %>

@@ -1,0 +1,50 @@
+<div class="page-header">
+  <h1>Add New Planet</h1>
+  <p>Register a new world in our cosmic database</p>
+</div>
+
+<div class="form-container">
+  <% if (typeof error !== 'undefined') { %>
+  <div
+    style="
+      background: #f8d7da;
+      color: #721c24;
+      padding: 1rem;
+      border-radius: 5px;
+      margin-bottom: 2rem;
+    "
+  >
+    <strong>Error:</strong> <%= error %>
+  </div>
+  <% } %>
+
+  <form action="/planets" method="POST" enctype="multipart/form-data">
+    <div class="form-group">
+      <label for="name">Planet Name *</label>
+      <input type="text" id="name" name="name" required />
+    </div>
+
+    <div class="form-group">
+      <label for="size">Size (km diameter)</label>
+      <input type="number" id="size" name="size" />
+    </div>
+
+    <div class="form-group">
+      <label for="description">Description</label>
+      <textarea id="description" name="description"></textarea>
+    </div>
+
+    <div class="form-group">
+      <label for="image">Planet Image</label>
+      <input type="file" id="image" name="image" accept="image/*" />
+      <small style="color: #666; display: block; margin-top: 0.5rem">
+        Upload an image of this planet (optional)
+      </small>
+    </div>
+
+    <div style="margin-top: 2rem">
+      <button type="submit" class="btn btn-success">Create Planet</button>
+      <a href="/planets" class="btn btn-secondary">Cancel</a>
+    </div>
+  </form>
+</div>

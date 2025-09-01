@@ -1,0 +1,77 @@
+<div class="page-header">
+  <h1>Edit Galaxy: <%= galaxy.name %></h1>
+  <p>Update the information for this galaxy</p>
+</div>
+
+<div class="form-container">
+  <% if (typeof error !== 'undefined') { %>
+  <div
+    style="
+      background: #f8d7da;
+      color: #721c24;
+      padding: 1rem;
+      border-radius: 5px;
+      margin-bottom: 2rem;
+    "
+  >
+    <strong>Error:</strong> <%= error %>
+  </div>
+  <% } %>
+
+  <form
+    action="/galaxies/<%= galaxy.id %>?_method=PUT"
+    method="POST"
+    enctype="multipart/form-data"
+  >
+    <div class="form-group">
+      <label for="name">Galaxy Name *</label>
+      <input
+        type="text"
+        id="name"
+        name="name"
+        value="<%= galaxy.name %>"
+        required
+      />
+    </div>
+
+    <div class="form-group">
+      <label for="size">Size (light-years)</label>
+      <input
+        type="number"
+        id="size"
+        name="size"
+        value="<%= galaxy.size || '' %>"
+      />
+    </div>
+
+    <div class="form-group">
+      <label for="description">Description</label>
+      <textarea id="description" name="description">
+<%= galaxy.description || '' %></textarea
+      >
+    </div>
+
+    <div class="form-group">
+      <label for="image">Galaxy Image</label>
+      <% if (galaxy.image) { %>
+      <div style="margin-bottom: 1rem">
+        <p>Current image:</p>
+        <img
+          src="<%= galaxy.image %>"
+          alt="<%= galaxy.name %>"
+          style="max-width: 200px; border-radius: 5px"
+        />
+      </div>
+      <% } %>
+      <input type="file" id="image" name="image" accept="image/*" />
+      <small style="color: #666; display: block; margin-top: 0.5rem">
+        Upload a new image to replace the current one (optional)
+      </small>
+    </div>
+
+    <div style="margin-top: 2rem">
+      <button type="submit" class="btn btn-success">Update Galaxy</button>
+      <a href="/galaxies/<%= galaxy.id %>" class="btn btn-secondary">Cancel</a>
+    </div>
+  </form>
+</div>
